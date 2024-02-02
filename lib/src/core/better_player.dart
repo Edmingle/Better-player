@@ -66,12 +66,10 @@ class _BetterPlayerState extends State<BetterPlayer>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    // if (Platform.isIOS){
     SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeRight,
     DeviceOrientation.landscapeLeft,
     ]);
-    // }
 
   }
 
@@ -156,10 +154,19 @@ class _BetterPlayerState extends State<BetterPlayer>
   }
 
   // ignore: avoid_void_async
-  Future<void> onFullScreenChanged() async {
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text("This feature is not available."),
-    ));
+ Future<void> onFullScreenChanged() async {
+    double width = MediaQuery.of(context).size.height;
+   if (Platform.isIOS) {
+     if (width < 600) {
+       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+         content: Text("This feature is not available."),
+       ));
+     }
+  }else{
+     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+       content: Text("This feature is not available."),
+     ));
+   }
 
 
     // final controller = widget.controller;
