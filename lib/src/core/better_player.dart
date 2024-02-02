@@ -141,6 +141,7 @@ class _BetterPlayerState extends State<BetterPlayer>
   }
 
   void onControllerEvent(BetterPlayerControllerEvent event) {
+    print("Updated");
     switch (event) {
       case BetterPlayerControllerEvent.openFullscreen:
         onFullScreenChanged();
