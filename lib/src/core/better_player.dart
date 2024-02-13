@@ -66,11 +66,12 @@ class _BetterPlayerState extends State<BetterPlayer>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    SystemChrome.setPreferredOrientations([
-    DeviceOrientation.landscapeRight,
-    DeviceOrientation.landscapeLeft,
-    ]);
-
+    if (Platform.isIOS) {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeRight,
+        DeviceOrientation.landscapeLeft,
+      ]);
+    }
   }
 
   @override
@@ -139,7 +140,6 @@ class _BetterPlayerState extends State<BetterPlayer>
   }
 
   void onControllerEvent(BetterPlayerControllerEvent event) {
-    print("Updated");
     switch (event) {
       case BetterPlayerControllerEvent.openFullscreen:
         onFullScreenChanged();
@@ -154,36 +154,34 @@ class _BetterPlayerState extends State<BetterPlayer>
   }
 
   // ignore: avoid_void_async
- Future<void> onFullScreenChanged() async {
-    double width = MediaQuery.of(context).size.height;
-   if (Platform.isIOS) {
-     if (width < 600) {
-       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-         content: Text("This feature is not available."),
-       ));
-     }
-  }else{
-     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-       content: Text("This feature is not available."),
-     ));
-   }
-
-
-    // final controller = widget.controller;
-    // if (controller.isFullScreen && !_isFullScreen && Platform.isAndroid ) {
-    //   _isFullScreen = true;
-    //   controller
-    //       .postEvent(BetterPlayerEvent(BetterPlayerEventType.openFullscreen));
-    //   await _pushFullScreenWidget(context);
-    // } else if (_isFullScreen) {
-    //   if(Platform.isAndroid){
-    //     Navigator.of(context, rootNavigator: true).pop();
-    //     _isFullScreen = false;
-    //     controller
-    //         .postEvent(BetterPlayerEvent(BetterPlayerEventType.hideFullscreen));
-    //   }
-    //
-    // }
+  Future<void> onFullScreenChanged() async {
+    double width = MediaQuery
+        .of(context)
+        .size
+        .height;
+    if (Platform.isIOS) {
+      if (width < 600) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("This feature is not available."),
+        ));
+      }
+    } else {
+      final controller = widget.controller;
+      if (controller.isFullScreen && !_isFullScreen && Platform.isAndroid) {
+        _isFullScreen = true;
+        controller
+            .postEvent(BetterPlayerEvent(BetterPlayerEventType.openFullscreen));
+        await _pushFullScreenWidget(context);
+      } else if (_isFullScreen) {
+        if (Platform.isAndroid) {
+          Navigator.of(context, rootNavigator: true).pop();
+          _isFullScreen = false;
+          controller
+              .postEvent(
+              BetterPlayerEvent(BetterPlayerEventType.hideFullscreen));
+        }
+      }
+    }
   }
 
   @override
