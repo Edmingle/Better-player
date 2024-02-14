@@ -66,12 +66,12 @@ class _BetterPlayerState extends State<BetterPlayer>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    if (Platform.isIOS) {
+    // if (Platform.isIOS) {
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.landscapeRight,
         DeviceOrientation.landscapeLeft,
       ]);
-    }
+    // }
   }
 
   @override

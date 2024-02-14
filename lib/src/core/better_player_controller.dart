@@ -551,7 +551,7 @@ class BetterPlayerController {
         ?.videoEventStreamController.stream
         .listen(_handleVideoEvent);
 
-    final fullScreenByDefault = betterPlayerConfiguration.fullScreenByDefault;
+    final fullScreenByDefault = Platform.isAndroid ? true : false;
     if (betterPlayerConfiguration.autoPlay) {
       if (fullScreenByDefault && !isFullScreen) {
         enterFullScreen();
