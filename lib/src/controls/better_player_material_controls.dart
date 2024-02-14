@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:better_player/src/configuration/better_player_controls_configuration.dart';
 import 'package:better_player/src/controls/better_player_clickable_widget.dart';
 import 'package:better_player/src/controls/better_player_controls_state.dart';
@@ -345,12 +346,14 @@ class _BetterPlayerMaterialControlsState
             height: _controlsConfiguration.controlBarHeight,
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Center(
-              child: Icon(
-                _betterPlayerController!.isFullScreen
-                    ? _controlsConfiguration.fullscreenDisableIcon
-                    : _controlsConfiguration.fullscreenEnableIcon,
-                color: _controlsConfiguration.iconsColor,
-              ),
+              child: Platform.isAndroid
+                  ? Icon(
+                      _betterPlayerController!.isFullScreen
+                          ? _controlsConfiguration.fullscreenDisableIcon
+                          : _controlsConfiguration.fullscreenEnableIcon,
+                      color: _controlsConfiguration.iconsColor,
+                    )
+                  : Container(),
             ),
           ),
         ),
