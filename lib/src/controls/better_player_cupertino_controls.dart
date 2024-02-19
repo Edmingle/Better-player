@@ -811,5 +811,3 @@ class _BetterPlayerCupertinoControlsState
     );
   }
 }
-
-//Testing for commmit
