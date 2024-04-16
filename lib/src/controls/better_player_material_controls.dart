@@ -346,14 +346,7 @@ class _BetterPlayerMaterialControlsState
             height: _controlsConfiguration.controlBarHeight,
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Center(
-              child: Platform.isAndroid
-                  ? Icon(
-                      _betterPlayerController!.isFullScreen
-                          ? _controlsConfiguration.fullscreenDisableIcon
-                          : _controlsConfiguration.fullscreenEnableIcon,
-                      color: _controlsConfiguration.iconsColor,
-                    )
-                  : Container(),
+              child: Container()
             ),
           ),
         ),

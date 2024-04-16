@@ -260,15 +260,7 @@ class _BetterPlayerCupertinoControlsState
             ),
             decoration: BoxDecoration(color: backgroundColor),
             child: Center(
-              child: Platform.isAndroid
-                  ? Icon(
-                      _betterPlayerController!.isFullScreen
-                          ? _controlsConfiguration.fullscreenDisableIcon
-                          : _controlsConfiguration.fullscreenEnableIcon,
-                      color: iconColor,
-                      size: iconSize,
-                    )
-                  : Container(),
+              child: Container(),
             ),
           ),
         ),
